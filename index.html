@@ -3,468 +3,1149 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Sohini Naskar | Biotechnology × AI</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
 
 body{
-font-family:Arial,sans-serif;
-background:#050b14;
-color:white;
-overflow-x:hidden;
+    font-family:Arial,sans-serif;
+    background:#05020b;
+    color:white;
+    overflow-x:hidden;
 }
 
-/* ===== INTRO ===== */
+
+/* ================= INTRO ================= */
 
 .intro{
-position:fixed;
-inset:0;
-z-index:999;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-background:#050b14;
-animation:hideIntro 1s ease 6s forwards;
+    position:fixed;
+    inset:0;
+    z-index:9999;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+
+    background:#02060d;
+    overflow:hidden;
+
+    animation:introExit 1.4s ease 8.5s forwards;
 }
 
-.introBox{
-position:relative;
+
+/* BLUE DNA IMAGE */
+
+.intro::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background-image:
+        linear-gradient(
+            rgba(0,10,25,.35),
+            rgba(0,5,15,.65)
+        ),
+        url("blue-dna.jpg");
+
+    background-size:cover;
+    background-position:center;
+
+    opacity:.75;
+
+    animation:dnaBackground 8s ease-in-out infinite alternate;
 }
+
+
+.intro::after{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0,183,255,.20),
+            transparent 45%
+        );
+}
+
+
+/* INTRO CONTENT */
+
+.introBox{
+    position:relative;
+    z-index:3;
+
+    width:90%;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
 
 /* DNA */
 
 .dna{
-width:150px;
-height:280px;
-margin:auto;
-position:relative;
-animation:dnaMove 3s ease-in-out infinite;
+    width:145px;
+    height:270px;
+
+    position:relative;
+
+    margin-bottom:25px;
+
+    animation:
+        dnaAppear 1.5s ease forwards,
+        dnaFloat 3s ease-in-out 1.5s infinite;
 }
 
-.dna:before,
-.dna:after{
-content:"";
-position:absolute;
-top:0;
-width:7px;
-height:280px;
-border-radius:50%;
-background:#63e6ff;
-box-shadow:0 0 20px #63e6ff;
+
+.dna::before,
+.dna::after{
+    content:"";
+
+    position:absolute;
+    top:0;
+
+    width:7px;
+    height:270px;
+
+    border-radius:50%;
+
+    background:#63e6ff;
+
+    box-shadow:
+        0 0 10px #63e6ff,
+        0 0 25px #00bfff,
+        0 0 50px #008cff;
 }
 
-.dna:before{
-left:35px;
-transform:rotate(18deg);
+
+.dna::before{
+    left:32px;
+    transform:rotate(18deg);
 }
 
-.dna:after{
-right:35px;
-transform:rotate(-18deg);
+
+.dna::after{
+    right:32px;
+    transform:rotate(-18deg);
 }
+
 
 .rung{
-position:absolute;
-left:35px;
-width:80px;
-height:4px;
-background:#63e6ff;
-box-shadow:0 0 15px #63e6ff;
+    position:absolute;
+    left:32px;
+
+    width:81px;
+    height:4px;
+
+    background:#63e6ff;
+
+    box-shadow:
+        0 0 10px #63e6ff,
+        0 0 25px #00bfff;
+
+    animation:rungGlow 1.5s ease-in-out infinite alternate;
 }
 
-.r1{top:25px}
-.r2{top:70px}
-.r3{top:115px}
-.r4{top:160px}
-.r5{top:205px}
-.r6{top:250px}
+.r1{top:20px}
+.r2{top:65px}
+.r3{top:110px}
+.r4{top:155px}
+.r5{top:200px}
+.r6{top:245px}
+
 
 /* TECHNOLOGY */
 
 .tech{
-margin-top:20px;
-font-size:clamp(28px,6vw,55px);
-font-weight:bold;
-letter-spacing:7px;
-color:#63e6ff;
-opacity:0;
-animation:pop 1s ease 1.5s forwards;
+    font-size:clamp(30px,7vw,65px);
+    font-weight:900;
+    letter-spacing:9px;
+
+    color:#63e6ff;
+
+    text-shadow:
+        0 0 10px #63e6ff,
+        0 0 30px #008cff;
+
+    opacity:0;
+    transform:scale(.4);
+
+    animation:
+        popText 1s cubic-bezier(.2,.8,.2,1) 1.8s forwards;
 }
+
 
 /* NAME */
 
 .name{
-margin-top:22px;
-font-size:clamp(20px,4vw,38px);
-font-weight:bold;
-letter-spacing:3px;
-opacity:0;
-animation:pop 1s ease 3s forwards;
+    margin-top:20px;
+
+    font-size:clamp(20px,4vw,40px);
+    font-weight:bold;
+    letter-spacing:4px;
+
+    text-shadow:
+        0 0 15px rgba(255,255,255,.5);
+
+    opacity:0;
+    transform:scale(.4);
+
+    animation:
+        popText 1s cubic-bezier(.2,.8,.2,1) 3.5s forwards;
 }
+
 
 /* BIOTECH AI */
 
 .bio{
-margin-top:25px;
-font-size:clamp(45px,9vw,90px);
-font-weight:bold;
-opacity:0;
-animation:pop 1s ease 4.2s forwards;
+    margin-top:25px;
+
+    font-size:clamp(42px,9vw,95px);
+    font-weight:900;
+
+    opacity:0;
+    transform:scale(.4);
+
+    animation:
+        popText 1s cubic-bezier(.2,.8,.2,1) 5.2s forwards;
 }
+
 
 .bio span{
-color:#63e6ff;
+    color:#63e6ff;
+
+    text-shadow:
+        0 0 10px #63e6ff,
+        0 0 30px #008cff;
 }
 
-/* ===== MAIN ===== */
+
+/* ================= MAIN ================= */
 
 main{
-opacity:0;
-animation:showMain 1.5s ease 6s forwards;
+    min-height:100vh;
+
+    opacity:0;
+
+    animation:
+        mainAppear 1.5s ease 8.5s forwards;
 }
+
+
+/* ================= NAVBAR ================= */
 
 nav{
-padding:20px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-position:absolute;
-width:100%;
-z-index:5;
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+
+    z-index:100;
+
+    padding:22px 7%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:
+        rgba(10,5,20,.35);
+
+    backdrop-filter:blur(15px);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
 }
+
 
 nav b{
-font-size:22px;
-color:#63e6ff;
+    font-size:23px;
+
+    color:#d9b8ff;
+
+    text-shadow:
+        0 0 15px #9d4edd;
 }
+
+
+nav div{
+    display:flex;
+    gap:28px;
+}
+
 
 nav a{
-color:#aaa;
-text-decoration:none;
-margin-left:20px;
+    color:#ddd;
+    text-decoration:none;
+
+    font-size:15px;
+
+    transition:.3s;
 }
+
 
 nav a:hover{
-color:#63e6ff;
+    color:#d9a8ff;
+
+    text-shadow:
+        0 0 15px #b45cff;
 }
+
+
+/* ================= HERO ================= */
 
 .hero{
-min-height:100vh;
-padding:150px 8%;
-display:flex;
-align-items:center;
-position:relative;
-background:
-radial-gradient(circle at 80% 25%,#174b69,#07111f 45%);
+    min-height:100vh;
+
+    padding:
+        150px 8%
+        100px;
+
+    display:flex;
+    align-items:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background-image:
+
+        linear-gradient(
+            90deg,
+            rgba(5,0,15,.78),
+            rgba(20,5,35,.42)
+        ),
+
+        url("purple-bg.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
 }
 
-.hero:before{
-content:"🧬";
-position:absolute;
-right:7%;
-top:25%;
-font-size:230px;
-opacity:.07;
+
+.hero::before{
+    content:"";
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    border-radius:50%;
+
+    background:#9d4edd;
+
+    filter:blur(150px);
+
+    opacity:.18;
+
+    right:-150px;
+    top:20%;
 }
+
+
+.hero::after{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(4,0,12,.65),
+            transparent 60%
+        );
+}
+
 
 .content{
-position:relative;
-z-index:2;
+    position:relative;
+    z-index:3;
+
+    max-width:800px;
 }
+
 
 small{
-color:#63e6ff;
-letter-spacing:3px;
-font-size:18px;
+    color:#d6a7ff;
+
+    letter-spacing:4px;
+
+    font-size:15px;
+
+    text-shadow:
+        0 0 15px #a855f7;
 }
+
 
 h1{
-font-size:clamp(55px,9vw,95px);
-line-height:.95;
-margin:20px 0;
+    font-size:
+        clamp(55px,9vw,105px);
+
+    line-height:.92;
+
+    margin:22px 0;
+
+    font-weight:900;
+
+    letter-spacing:-3px;
 }
 
-h1 span{color:#63e6ff}
+
+h1 span{
+    color:#c77dff;
+
+    text-shadow:
+        0 0 15px #9d4edd,
+        0 0 35px rgba(157,78,221,.6);
+}
+
 
 .hero p{
-max-width:620px;
-color:#aebdca;
-font-size:18px;
+    max-width:650px;
+
+    color:#ded6e8;
+
+    font-size:18px;
+
+    line-height:1.7;
 }
+
+
+/* BUTTON */
 
 .btn{
-display:inline-block;
-margin-top:25px;
-padding:13px 24px;
-background:#63e6ff;
-color:#07111f;
-text-decoration:none;
-border-radius:8px;
-font-weight:bold;
-box-shadow:0 0 25px #63e6ff55;
+    display:inline-block;
+
+    margin-top:30px;
+
+    padding:14px 28px;
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    background:
+        linear-gradient(
+            135deg,
+            #9d4edd,
+            #6a0dad
+        );
+
+    border:
+        1px solid rgba(255,255,255,.2);
+
+    box-shadow:
+        0 0 25px rgba(157,78,221,.45);
+
+    transition:.35s;
 }
 
-section{padding:80px 8%}
 
-.dark{background:#081522}
+.btn:hover{
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 0 40px rgba(190,100,255,.7);
+}
+
+
+/* ================= SECTIONS ================= */
+
+section{
+    position:relative;
+
+    padding:100px 8%;
+
+    overflow:hidden;
+}
+
+
+.dark{
+    background:
+
+        linear-gradient(
+            rgba(8,2,18,.85),
+            rgba(8,2,18,.92)
+        ),
+
+        url("purple-bg.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
 
 h2{
-font-size:38px;
-margin:10px 0 30px;
+    font-size:
+        clamp(35px,5vw,55px);
+
+    margin:
+        12px 0 30px;
 }
+
 
 .text{
-max-width:750px;
-color:#aebdca;
+    max-width:750px;
+
+    color:#cfc3d9;
+
+    font-size:18px;
+
+    line-height:1.8;
 }
 
-.skills,.projects{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:18px;
+
+/* ================= CARDS ================= */
+
+.skills,
+.projects{
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(220px,1fr)
+        );
+
+    gap:22px;
 }
+
 
 .card{
-background:#0c1d2e;
-border:1px solid #193f52;
-padding:25px;
-border-radius:14px;
-transition:.3s;
+    padding:30px;
+
+    min-height:150px;
+
+    border-radius:20px;
+
+    background:
+        rgba(30,10,50,.55);
+
+    border:
+        1px solid rgba(205,150,255,.18);
+
+    backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+        inset 0 0 30px
+        rgba(255,255,255,.025),
+
+        0 15px 40px
+        rgba(0,0,0,.35);
+
+    transition:.4s;
 }
+
 
 .card:hover{
-transform:translateY(-7px);
-border-color:#63e6ff;
-box-shadow:0 0 25px #63e6ff30;
+    transform:
+        translateY(-10px)
+        scale(1.02);
+
+    border-color:
+        rgba(210,150,255,.65);
+
+    box-shadow:
+        0 0 35px
+        rgba(157,78,221,.35);
 }
+
 
 .card h3{
-color:#63e6ff;
-margin-bottom:8px;
+    color:#d6a7ff;
+
+    margin-bottom:12px;
+
+    font-size:20px;
 }
+
 
 .card p{
-color:#9eafbf;
-font-size:14px;
+    color:#bdb1c8;
+
+    font-size:14px;
+
+    line-height:1.6;
 }
+
+
+/* ================= FOOTER ================= */
 
 footer{
-text-align:center;
-padding:25px;
-color:#71869a;
-border-top:1px solid #193f52;
+    text-align:center;
+
+    padding:30px;
+
+    color:#9b8ba7;
+
+    background:#05020b;
+
+    border-top:
+        1px solid rgba(200,150,255,.15);
 }
 
-/* ===== ANIMATIONS ===== */
 
-@keyframes pop{
-0%{
-opacity:0;
-transform:scale(.5);
-}
-70%{
-transform:scale(1.08);
-}
-100%{
-opacity:1;
-transform:scale(1);
-}
-}
+/* ================= ANIMATIONS ================= */
 
-@keyframes dnaMove{
-0%,100%{transform:rotate(0deg) translateY(0)}
-50%{transform:rotate(5deg) translateY(-12px)}
+@keyframes dnaBackground{
+
+    from{
+        transform:
+            scale(1.05)
+            translate3d(0,0,0);
+    }
+
+    to{
+        transform:
+            scale(1.12)
+            translate3d(-15px,-10px,0);
+    }
 }
 
-@keyframes showMain{
-to{opacity:1}
+
+@keyframes dnaAppear{
+
+    0%{
+        opacity:0;
+
+        transform:
+            scale(.2)
+            rotate(-25deg);
+
+        filter:blur(15px);
+    }
+
+    70%{
+        opacity:1;
+
+        transform:
+            scale(1.08)
+            rotate(5deg);
+
+        filter:blur(0);
+    }
+
+    100%{
+        opacity:1;
+
+        transform:
+            scale(1)
+            rotate(0);
+    }
 }
 
-@keyframes hideIntro{
-to{
-opacity:0;
-visibility:hidden;
+
+@keyframes dnaFloat{
+
+    0%,100%{
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50%{
+        transform:
+            translateY(-12px)
+            rotate(4deg);
+    }
 }
+
+
+@keyframes rungGlow{
+
+    from{
+        opacity:.65;
+
+        box-shadow:
+            0 0 8px #63e6ff;
+    }
+
+    to{
+        opacity:1;
+
+        box-shadow:
+            0 0 15px #63e6ff,
+            0 0 30px #008cff;
+    }
 }
+
+
+@keyframes popText{
+
+    0%{
+        opacity:0;
+
+        transform:
+            scale(.35)
+            translateY(25px);
+
+        filter:blur(12px);
+    }
+
+    65%{
+        opacity:1;
+
+        transform:
+            scale(1.08)
+            translateY(-3px);
+
+        filter:blur(0);
+    }
+
+    100%{
+        opacity:1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}
+
+
+@keyframes introExit{
+
+    0%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    70%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+        visibility:hidden;
+        transform:scale(1.04);
+    }
+}
+
+
+@keyframes mainAppear{
+
+    0%{
+        opacity:0;
+        transform:scale(1.03);
+    }
+
+    100%{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+
+/* ================= MOBILE ================= */
 
 @media(max-width:600px){
 
-nav a{
-font-size:13px;
-margin-left:10px;
+    nav{
+        padding:18px 5%;
+    }
+
+    nav b{
+        font-size:17px;
+    }
+
+    nav div{
+        gap:13px;
+    }
+
+    nav a{
+        font-size:12px;
+    }
+
+    .introBox{
+        width:95%;
+    }
+
+    .dna{
+        transform:scale(.8);
+        margin-bottom:5px;
+    }
+
+    .tech{
+        font-size:31px;
+        letter-spacing:5px;
+    }
+
+    .name{
+        font-size:19px;
+        letter-spacing:2px;
+    }
+
+    .bio{
+        font-size:45px;
+    }
+
+    .hero{
+        min-height:100svh;
+
+        padding:
+            130px 7%
+            80px;
+
+        background-attachment:scroll;
+    }
+
+    h1{
+        font-size:58px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    section{
+        padding:75px 7%;
+    }
+
+    .dark{
+        background-attachment:scroll;
+    }
+
+    .card{
+        padding:24px;
+    }
+
 }
 
-nav b{
-font-size:18px;
-}
-
-.hero{
-padding-top:150px;
-}
-
-.hero:before{
-font-size:140px;
-right:-20px;
-}
-
-h1{
-font-size:58px;
-}
-
-}
 </style>
 </head>
 
+
 <body>
 
-<!-- INTRO -->
+
+<!-- ================= INTRO ================= -->
 
 <div class="intro">
 
-<div class="introBox">
+    <div class="introBox">
 
-<div class="dna">
-<div class="rung r1"></div>
-<div class="rung r2"></div>
-<div class="rung r3"></div>
-<div class="rung r4"></div>
-<div class="rung r5"></div>
-<div class="rung r6"></div>
+        <div class="dna">
+
+            <div class="rung r1"></div>
+            <div class="rung r2"></div>
+            <div class="rung r3"></div>
+            <div class="rung r4"></div>
+            <div class="rung r5"></div>
+            <div class="rung r6"></div>
+
+        </div>
+
+
+        <div class="tech">
+            TECHNOLOGY
+        </div>
+
+
+        <div class="name">
+            HELLO, I'M SOHINI NASKAR
+        </div>
+
+
+        <div class="bio">
+            BIOTECH <span>× AI</span>
+        </div>
+
+    </div>
+
 </div>
 
-<div class="tech">TECHNOLOGY</div>
-
-<div class="name">HELLO, I'M SOHINI NASKAR</div>
-
-<div class="bio">BIOTECH <span>× AI</span></div>
-
-</div>
-
-</div>
 
 
-<!-- MAIN WEBSITE -->
+<!-- ================= MAIN WEBSITE ================= -->
 
 <main>
 
-<nav>
-<b>Sohini Naskar.</b>
 
-<div>
-<a href="#about">About</a>
-<a href="#skills">Skills</a>
-<a href="#projects">Projects</a>
-</div>
+<nav>
+
+    <b>
+        Sohini Naskar.
+    </b>
+
+    <div>
+
+        <a href="#about">
+            About
+        </a>
+
+        <a href="#skills">
+            Skills
+        </a>
+
+        <a href="#projects">
+            Projects
+        </a>
+
+    </div>
+
 </nav>
 
 
+
+<!-- HERO -->
+
 <header class="hero">
 
-<div class="content">
+    <div class="content">
 
-<small>BIOTECHNOLOGY × AI</small>
+        <small>
+            BIOTECHNOLOGY × AI
+        </small>
 
-<h1>
-BIOLOGY<br>
-<span>MEETS AI</span>
-</h1>
 
-<p>
-Biotechnology & AI student exploring Python,
-data science, genomics and computational biology.
-</p>
+        <h1>
 
-<a class="btn" href="https://github.com/Sohini-17">
-GitHub →
-</a>
+            BIOLOGY<br>
 
-</div>
+            <span>
+                MEETS AI
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            Biotechnology & AI student exploring
+            Python, data science, genomics and
+            computational biology.
+
+        </p>
+
+
+        <a
+            class="btn"
+            href="https://github.com/Sohini-17"
+            target="_blank"
+        >
+
+            GitHub →
+
+        </a>
+
+    </div>
 
 </header>
 
 
+
+<!-- ABOUT -->
+
 <section id="about" class="dark">
 
-<small>01 — ABOUT</small>
-<h2>Biology meets Technology.</h2>
+    <small>
+        01 — ABOUT
+    </small>
 
-<p class="text">
-I am building my skills in Python, AI, data analysis and biotechnology,
-with a long-term interest in genomics and computational biology.
-</p>
+
+    <h2>
+        Biology meets Technology.
+    </h2>
+
+
+    <p class="text">
+
+        I am building my skills in Python,
+        AI, data analysis and biotechnology,
+        with a long-term interest in genomics
+        and computational biology.
+
+    </p>
 
 </section>
 
+
+
+<!-- SKILLS -->
 
 <section id="skills">
 
-<small>02 — SKILLS</small>
-<h2>What I'm Learning</h2>
+    <small>
+        02 — SKILLS
+    </small>
 
-<div class="skills">
 
-<div class="card">
-<h3>🐍 Python</h3>
-<p>Programming & problem solving</p>
-</div>
+    <h2>
+        What I'm Learning
+    </h2>
 
-<div class="card">
-<h3>📊 Data</h3>
-<p>Analysis & visualization</p>
-</div>
 
-<div class="card">
-<h3>🤖 AI / ML</h3>
-<p>Machine learning fundamentals</p>
-</div>
+    <div class="skills">
 
-<div class="card">
-<h3>🧬 Biotechnology</h3>
-<p>Biology & genomics</p>
-</div>
 
-</div>
+        <div class="card">
+
+            <h3>
+                🐍 Python
+            </h3>
+
+            <p>
+                Programming & problem solving
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                📊 Data
+            </h3>
+
+            <p>
+                Analysis & visualization
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                🤖 AI / ML
+            </h3>
+
+            <p>
+                Machine learning fundamentals
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                🧬 Biotechnology
+            </h3>
+
+            <p>
+                Biology & genomics
+            </p>
+
+        </div>
+
+
+    </div>
+
 </section>
 
+
+
+<!-- PROJECTS -->
 
 <section id="projects" class="dark">
 
-<small>03 — PROJECTS</small>
-<h2>My Work</h2>
+    <small>
+        03 — PROJECTS
+    </small>
 
-<div class="projects">
 
-<div class="card">
-<h3>01 — Python</h3>
-<p>Python learning projects.</p>
-</div>
+    <h2>
+        My Work
+    </h2>
 
-<div class="card">
-<h3>02 — Data Analysis</h3>
-<p>Data-based projects.</p>
-</div>
 
-<div class="card">
-<h3>03 — Biotechnology</h3>
-<p>Future biotech projects.</p>
-</div>
+    <div class="projects">
 
-<div class="card">
-<h3>04 — AI for Biology</h3>
-<p>AI + biology projects.</p>
-</div>
 
-</div>
+        <div class="card">
+
+            <h3>
+                01 — Python
+            </h3>
+
+            <p>
+                Python learning projects.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                02 — Data Analysis
+            </h3>
+
+            <p>
+                Data-based projects.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                03 — Biotechnology
+            </h3>
+
+            <p>
+                Future biotech projects.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                04 — AI for Biology
+            </h3>
+
+            <p>
+                AI + biology projects.
+            </p>
+
+        </div>
+
+
+    </div>
+
 </section>
 
 
+
 <footer>
-© 2026 Sohini Naskar | Biotechnology × AI 🧬
+
+    © 2026 Sohini Naskar
+    | Biotechnology × AI 🧬
+
 </footer>
 
+
 </main>
+
 
 </body>
 </html>
