@@ -7,11 +7,10 @@
 <title>Sohini Naskar | Biotechnology × AI</title>
 
 <style>
-
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
 }
 
 html{
@@ -19,823 +18,936 @@ html{
 }
 
 body{
-    font-family:Arial,sans-serif;
-    background:#05020b;
-    color:white;
+    background:#08030f;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
     overflow-x:hidden;
 }
 
 
-/* ================= INTRO ================= */
+/* =====================================================
+   DNA INTRO
+===================================================== */
 
 .intro{
     position:fixed;
     inset:0;
     z-index:9999;
-
+    background:
+        radial-gradient(circle at center,
+        #123b78 0%,
+        #071a3d 35%,
+        #020713 75%);
     display:flex;
     justify-content:center;
     align-items:center;
-    text-align:center;
-
-    background:#02060d;
     overflow:hidden;
 
-    animation:introExit 1.4s ease 8.5s forwards;
+    animation:introDisappear 1.2s ease 9.5s forwards;
 }
-
-
-/* BLUE DNA IMAGE */
-
-.intro::before{
-    content:"";
-    position:absolute;
-    inset:0;
-
-    background-image:
-        linear-gradient(
-            rgba(0,10,25,.35),
-            rgba(0,5,15,.65)
-        ),
-        url("blue-dna.jpg");
-
-    background-size:cover;
-    background-position:center;
-
-    opacity:.75;
-
-    animation:dnaBackground 8s ease-in-out infinite alternate;
-}
-
 
 .intro::after{
     content:"";
     position:absolute;
     inset:0;
-
     background:
-        radial-gradient(
-            circle at center,
-            rgba(0,183,255,.20),
-            transparent 45%
-        );
+        linear-gradient(90deg,
+        transparent,
+        rgba(60,210,255,.04),
+        transparent);
+    pointer-events:none;
 }
 
 
-/* INTRO CONTENT */
-
-.introBox{
-    position:relative;
-    z-index:3;
-
-    width:90%;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-}
-
-
-/* DNA */
+/* DNA container */
 
 .dna{
-    width:145px;
-    height:270px;
-
-    position:relative;
-
-    margin-bottom:25px;
-
-    animation:
-        dnaAppear 1.5s ease forwards,
-        dnaFloat 3s ease-in-out 1.5s infinite;
+    position:absolute;
+    width:230px;
+    height:440px;
+    left:50%;
+    top:43%;
+    transform:translate(-50%,-50%);
+    animation:dnaPop 1s cubic-bezier(.15,.9,.25,1.3) 2.5s forwards;
 }
 
 
-.dna::before,
-.dna::after{
-    content:"";
+/* DNA strands */
 
+.strand{
     position:absolute;
     top:0;
-
-    width:7px;
-    height:270px;
-
+    width:9px;
+    height:100%;
     border-radius:50%;
 
-    background:#63e6ff;
+    background:#62eaff;
 
     box-shadow:
-        0 0 10px #63e6ff,
-        0 0 25px #00bfff,
-        0 0 50px #008cff;
+        0 0 8px #62eaff,
+        0 0 20px #00cfff,
+        0 0 45px #008cff;
+}
+
+.strand.left{
+    left:48px;
+
+    animation:
+        leftStrand 2.7s ease-out forwards,
+        floatingLeft 3s ease-in-out 3.6s infinite;
+}
+
+.strand.right{
+    right:48px;
+
+    animation:
+        rightStrand 2.7s ease-out forwards,
+        floatingRight 3s ease-in-out 3.6s infinite;
 }
 
 
-.dna::before{
-    left:32px;
+/* DNA horizontal connections */
+
+.rung{
+    position:absolute;
+    left:53px;
+    width:124px;
+    height:5px;
+    border-radius:20px;
+
+    background:#72edff;
+
+    box-shadow:
+        0 0 8px #72edff,
+        0 0 20px #00cfff;
+
+    opacity:0;
+    transform-origin:left center;
+
+    animation:rungShow .35s ease forwards;
+}
+
+.r1{top:15px;animation-delay:.15s}
+.r2{top:51px;animation-delay:.30s}
+.r3{top:87px;animation-delay:.45s}
+.r4{top:123px;animation-delay:.60s}
+.r5{top:159px;animation-delay:.75s}
+.r6{top:195px;animation-delay:.90s}
+.r7{top:231px;animation-delay:1.05s}
+.r8{top:267px;animation-delay:1.20s}
+.r9{top:303px;animation-delay:1.35s}
+.r10{top:339px;animation-delay:1.50s}
+.r11{top:375px;animation-delay:1.65s}
+.r12{top:411px;animation-delay:1.80s}
+
+
+/* alternating DNA angle */
+
+.r1,.r3,.r5,.r7,.r9,.r11{
     transform:rotate(18deg);
 }
 
-
-.dna::after{
-    right:32px;
+.r2,.r4,.r6,.r8,.r10,.r12{
     transform:rotate(-18deg);
 }
 
 
-.rung{
-    position:absolute;
-    left:32px;
+/* DNA animations */
 
-    width:81px;
-    height:4px;
+@keyframes leftStrand{
 
-    background:#63e6ff;
+    0%{
+        transform:translateX(-190px) rotate(-25deg);
+        opacity:0;
+    }
 
-    box-shadow:
-        0 0 10px #63e6ff,
-        0 0 25px #00bfff;
+    50%{
+        opacity:1;
+    }
 
-    animation:rungGlow 1.5s ease-in-out infinite alternate;
+    100%{
+        transform:translateX(0) rotate(18deg);
+        opacity:1;
+    }
 }
 
-.r1{top:20px}
-.r2{top:65px}
-.r3{top:110px}
-.r4{top:155px}
-.r5{top:200px}
-.r6{top:245px}
+@keyframes rightStrand{
+
+    0%{
+        transform:translateX(190px) rotate(25deg);
+        opacity:0;
+    }
+
+    50%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translateX(0) rotate(-18deg);
+        opacity:1;
+    }
+}
+
+@keyframes rungShow{
+
+    0%{
+        opacity:0;
+        transform:scaleX(0);
+    }
+
+    100%{
+        opacity:1;
+        transform:scaleX(1);
+    }
+}
+
+@keyframes dnaPop{
+
+    0%{
+        transform:translate(-50%,-50%) scale(.75);
+    }
+
+    65%{
+        transform:translate(-50%,-50%) scale(1.15);
+    }
+
+    100%{
+        transform:translate(-50%,-50%) scale(1);
+    }
+}
+
+@keyframes floatingLeft{
+
+    0%,100%{
+        margin-top:0;
+    }
+
+    50%{
+        margin-top:-8px;
+    }
+}
+
+@keyframes floatingRight{
+
+    0%,100%{
+        margin-top:0;
+    }
+
+    50%{
+        margin-top:8px;
+    }
+}
 
 
-/* TECHNOLOGY */
+/* =====================================================
+   INTRO TEXT
+===================================================== */
+
+.introText{
+    position:absolute;
+    top:72%;
+    width:100%;
+    text-align:center;
+    z-index:10;
+}
+
+.introText div{
+    opacity:0;
+    transform:translateY(20px);
+    animation:textAppear .8s ease forwards;
+}
 
 .tech{
-    font-size:clamp(30px,7vw,65px);
-    font-weight:900;
-    letter-spacing:9px;
-
-    color:#63e6ff;
-
-    text-shadow:
-        0 0 10px #63e6ff,
-        0 0 30px #008cff;
-
-    opacity:0;
-    transform:scale(.4);
-
-    animation:
-        popText 1s cubic-bezier(.2,.8,.2,1) 1.8s forwards;
+    color:#67eaff;
+    font-size:14px;
+    letter-spacing:8px;
+    animation-delay:3.6s !important;
 }
 
-
-/* NAME */
-
-.name{
-    margin-top:20px;
-
-    font-size:clamp(20px,4vw,40px);
+.myName{
+    margin-top:18px;
+    font-size:clamp(24px,5vw,48px);
     font-weight:bold;
-    letter-spacing:4px;
+    letter-spacing:3px;
+    animation-delay:4.9s !important;
+}
 
-    text-shadow:
-        0 0 15px rgba(255,255,255,.5);
+.bioAI{
+    margin-top:17px;
+    color:#c993ff;
+    font-size:clamp(18px,3vw,30px);
+    letter-spacing:6px;
+    animation-delay:6.2s !important;
+}
 
-    opacity:0;
-    transform:scale(.4);
+@keyframes textAppear{
 
-    animation:
-        popText 1s cubic-bezier(.2,.8,.2,1) 3.5s forwards;
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes introDisappear{
+
+    to{
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+    }
 }
 
 
-/* BIOTECH AI */
+/* =====================================================
+   MAIN PAGE
+===================================================== */
 
-.bio{
-    margin-top:25px;
-
-    font-size:clamp(42px,9vw,95px);
-    font-weight:900;
-
-    opacity:0;
-    transform:scale(.4);
-
-    animation:
-        popText 1s cubic-bezier(.2,.8,.2,1) 5.2s forwards;
-}
-
-
-.bio span{
-    color:#63e6ff;
-
-    text-shadow:
-        0 0 10px #63e6ff,
-        0 0 30px #008cff;
-}
-
-
-/* ================= MAIN ================= */
-
-main{
+.main{
     min-height:100vh;
+    position:relative;
 
-    opacity:0;
-
-    animation:
-        mainAppear 1.5s ease 8.5s forwards;
+    background:
+        radial-gradient(
+            ellipse at 75% 15%,
+            rgba(177,83,255,.35),
+            transparent 32%
+        ),
+        radial-gradient(
+            ellipse at 20% 55%,
+            rgba(103,32,171,.28),
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            #0b0314,
+            #1b0730 45%,
+            #07020e
+        );
 }
 
 
-/* ================= NAVBAR ================= */
+/* grid */
+
+.main::before{
+
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        100% 80px,
+        80px 100%;
+
+    pointer-events:none;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
 nav{
+
     position:fixed;
 
-    top:0;
-    left:0;
+    top:24px;
+    left:50%;
 
-    width:100%;
+    transform:translateX(-50%);
 
-    z-index:100;
+    width:min(1150px,90%);
 
-    padding:22px 7%;
+    padding:17px 24px;
 
     display:flex;
     justify-content:space-between;
     align-items:center;
 
-    background:
-        rgba(10,5,20,.35);
+    border:1px solid rgba(220,170,255,.18);
 
-    backdrop-filter:blur(15px);
+    border-radius:40px;
 
-    border-bottom:
-        1px solid rgba(255,255,255,.08);
+    background:rgba(20,5,35,.48);
+
+    backdrop-filter:blur(20px);
+
+    z-index:100;
 }
 
+.logo{
 
-nav b{
-    font-size:23px;
-
-    color:#d9b8ff;
-
-    text-shadow:
-        0 0 15px #9d4edd;
+    font-size:17px;
+    font-weight:bold;
+    letter-spacing:3px;
 }
 
+.logo span{
+    color:#ca83ff;
+}
 
-nav div{
+nav ul{
+
     display:flex;
-    gap:28px;
-}
+    gap:30px;
 
+    list-style:none;
+}
 
 nav a{
-    color:#ddd;
-    text-decoration:none;
 
-    font-size:15px;
+    text-decoration:none;
+    color:#cfc5d8;
+
+    font-size:11px;
+    letter-spacing:2px;
 
     transition:.3s;
 }
 
-
 nav a:hover{
-    color:#d9a8ff;
-
-    text-shadow:
-        0 0 15px #b45cff;
+    color:#d48cff;
 }
 
 
-/* ================= HERO ================= */
+/* =====================================================
+   HERO
+===================================================== */
 
 .hero{
+
     min-height:100vh;
 
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
     padding:
-        150px 8%
+        150px
+        8%
         100px;
 
-    display:flex;
-    align-items:center;
-
     position:relative;
-
-    overflow:hidden;
-
-    background-image:
-
-        linear-gradient(
-            90deg,
-            rgba(5,0,15,.78),
-            rgba(20,5,35,.42)
-        ),
-
-        url("purple-bg.jpg");
-
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
 }
 
+
+/* vertical side number */
 
 .hero::before{
-    content:"";
+
+    content:"01";
 
     position:absolute;
 
-    width:500px;
-    height:500px;
+    left:4%;
+    top:50%;
 
-    border-radius:50%;
+    writing-mode:vertical-rl;
 
-    background:#9d4edd;
+    color:#754394;
 
-    filter:blur(150px);
-
-    opacity:.18;
-
-    right:-150px;
-    top:20%;
+    letter-spacing:7px;
+    font-size:11px;
 }
 
 
-.hero::after{
-    content:"";
+.heroSmall{
 
-    position:absolute;
-    inset:0;
+    color:#c084ff;
 
-    background:
-        linear-gradient(
-            90deg,
-            rgba(4,0,12,.65),
-            transparent 60%
-        );
+    font-size:11px;
+
+    letter-spacing:8px;
+
+    margin-bottom:30px;
 }
 
 
-.content{
-    position:relative;
-    z-index:3;
+.hero h1{
 
-    max-width:800px;
+    max-width:1000px;
+
+    font-size:
+        clamp(55px,10vw,145px);
+
+    line-height:.82;
+
+    letter-spacing:-7px;
+
+    font-weight:800;
 }
 
 
-small{
-    color:#d6a7ff;
+.hero h1 span{
 
-    letter-spacing:4px;
+    display:block;
+
+    color:transparent;
+
+    -webkit-text-stroke:
+        1px #c77cff;
+
+    margin-left:8%;
+}
+
+
+.heroDescription{
+
+    max-width:600px;
+
+    margin-top:45px;
+
+    color:#aaa0b3;
 
     font-size:15px;
-
-    text-shadow:
-        0 0 15px #a855f7;
-}
-
-
-h1{
-    font-size:
-        clamp(55px,9vw,105px);
-
-    line-height:.92;
-
-    margin:22px 0;
-
-    font-weight:900;
-
-    letter-spacing:-3px;
-}
-
-
-h1 span{
-    color:#c77dff;
-
-    text-shadow:
-        0 0 15px #9d4edd,
-        0 0 35px rgba(157,78,221,.6);
-}
-
-
-.hero p{
-    max-width:650px;
-
-    color:#ded6e8;
-
-    font-size:18px;
-
-    line-height:1.7;
-}
-
-
-/* BUTTON */
-
-.btn{
-    display:inline-block;
-
-    margin-top:30px;
-
-    padding:14px 28px;
-
-    color:white;
-
-    text-decoration:none;
-
-    border-radius:10px;
-
-    font-weight:bold;
-
-    background:
-        linear-gradient(
-            135deg,
-            #9d4edd,
-            #6a0dad
-        );
-
-    border:
-        1px solid rgba(255,255,255,.2);
-
-    box-shadow:
-        0 0 25px rgba(157,78,221,.45);
-
-    transition:.35s;
-}
-
-
-.btn:hover{
-    transform:translateY(-4px);
-
-    box-shadow:
-        0 0 40px rgba(190,100,255,.7);
-}
-
-
-/* ================= SECTIONS ================= */
-
-section{
-    position:relative;
-
-    padding:100px 8%;
-
-    overflow:hidden;
-}
-
-
-.dark{
-    background:
-
-        linear-gradient(
-            rgba(8,2,18,.85),
-            rgba(8,2,18,.92)
-        ),
-
-        url("purple-bg.jpg");
-
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
-}
-
-
-h2{
-    font-size:
-        clamp(35px,5vw,55px);
-
-    margin:
-        12px 0 30px;
-}
-
-
-.text{
-    max-width:750px;
-
-    color:#cfc3d9;
-
-    font-size:18px;
 
     line-height:1.8;
 }
 
 
-/* ================= CARDS ================= */
+.github{
 
-.skills,
-.projects{
-    display:grid;
+    display:inline-block;
 
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(220px,1fr)
-        );
+    width:max-content;
 
-    gap:22px;
+    margin-top:35px;
+
+    padding:15px 28px;
+
+    border-radius:40px;
+
+    text-decoration:none;
+
+    color:white;
+
+    border:1px solid #a95be0;
+
+    background:rgba(150,60,220,.12);
+
+    box-shadow:
+        0 0 35px rgba(180,80,255,.13);
+
+    transition:.3s;
+}
+
+.github:hover{
+
+    background:rgba(180,80,255,.25);
+
+    transform:translateY(-3px);
 }
 
 
-.card{
-    padding:30px;
+/* =====================================================
+   VERTICAL ABOUT
+===================================================== */
 
-    min-height:150px;
+.verticalSection{
 
-    border-radius:20px;
+    position:relative;
 
-    background:
-        rgba(30,10,50,.55);
+    width:min(1150px,88%);
+
+    margin:auto;
+
+    padding:150px 0;
+}
+
+
+.sideTitle{
+
+    position:absolute;
+
+    left:0;
+    top:150px;
+
+    writing-mode:vertical-rl;
+
+    transform:rotate(180deg);
+
+    font-size:10px;
+
+    letter-spacing:7px;
+
+    color:#8e55a9;
+}
+
+
+.sectionContent{
+
+    margin-left:100px;
+
+    border-left:
+        1px solid rgba(211,137,255,.14);
+
+    padding-left:70px;
+}
+
+
+.sectionHeading{
+
+    font-size:
+        clamp(38px,6vw,75px);
+
+    line-height:.95;
+
+    margin-bottom:50px;
+
+    letter-spacing:-3px;
+}
+
+
+/* =====================================================
+   ABOUT CARDS
+===================================================== */
+
+.aboutGrid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:20px;
+}
+
+
+.aboutCard{
+
+    min-height:300px;
+
+    padding:35px;
 
     border:
-        1px solid rgba(205,150,255,.18);
+        1px solid
+        rgba(214,150,255,.15);
 
-    backdrop-filter:
-        blur(18px);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(137,53,190,.16),
+            rgba(20,5,35,.35)
+        );
 
-    box-shadow:
-        inset 0 0 30px
-        rgba(255,255,255,.025),
+    backdrop-filter:blur(18px);
 
-        0 15px 40px
-        rgba(0,0,0,.35);
+    position:relative;
+
+    overflow:hidden;
 
     transition:.4s;
 }
 
 
-.card:hover{
-    transform:
-        translateY(-10px)
-        scale(1.02);
+.aboutCard::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    right:-70px;
+    bottom:-70px;
+
+    border-radius:50%;
+
+    background:#a74dff;
+
+    filter:blur(70px);
+
+    opacity:.25;
+}
+
+
+.aboutCard:hover{
+
+    transform:translateY(-8px);
 
     border-color:
-        rgba(210,150,255,.65);
+        rgba(210,130,255,.5);
 
     box-shadow:
-        0 0 35px
-        rgba(157,78,221,.35);
+        0 25px 80px
+        rgba(132,45,190,.2);
 }
 
 
-.card h3{
-    color:#d6a7ff;
+.cardNumber{
 
-    margin-bottom:12px;
+    color:#9655c4;
 
-    font-size:20px;
+    font-size:11px;
+
+    letter-spacing:4px;
 }
 
 
-.card p{
-    color:#bdb1c8;
+.aboutCard h3{
 
-    font-size:14px;
+    margin-top:55px;
+
+    font-size:28px;
+}
+
+
+.aboutCard p{
+
+    margin-top:18px;
+
+    color:#a69baa;
+
+    line-height:1.8;
+
+    max-width:420px;
+}
+
+
+/* =====================================================
+   SKILLS
+===================================================== */
+
+.skillList{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+}
+
+
+.skill{
+
+    padding:14px 22px;
+
+    border-radius:40px;
+
+    border:
+        1px solid
+        rgba(211,132,255,.22);
+
+    color:#cdb1da;
+
+    background:
+        rgba(121,40,171,.08);
+
+    transition:.3s;
+}
+
+
+.skill:hover{
+
+    border-color:#c47aff;
+
+    color:white;
+
+    transform:translateY(-3px);
+}
+
+
+/* =====================================================
+   PROJECTS
+===================================================== */
+
+.project{
+
+    min-height:180px;
+
+    padding:35px 0;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.09);
+}
+
+
+.projectTitle{
+
+    font-size:
+        clamp(24px,4vw,45px);
+
+    letter-spacing:-1px;
+}
+
+
+.projectDescription{
+
+    color:#918697;
+
+    margin-top:12px;
 
     line-height:1.6;
 }
 
 
-/* ================= FOOTER ================= */
+.projectNo{
+
+    font-size:70px;
+
+    color:#51216b;
+
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
 
 footer{
+
+    padding:100px 20px;
+
     text-align:center;
 
-    padding:30px;
-
-    color:#9b8ba7;
-
-    background:#05020b;
-
     border-top:
-        1px solid rgba(200,150,255,.15);
+        1px solid
+        rgba(255,255,255,.08);
+
+    color:#6f6278;
+
+    letter-spacing:2px;
+}
+
+footer strong{
+    color:#c785ff;
 }
 
 
-/* ================= ANIMATIONS ================= */
+/* =====================================================
+   MOBILE
+===================================================== */
 
-@keyframes dnaBackground{
-
-    from{
-        transform:
-            scale(1.05)
-            translate3d(0,0,0);
-    }
-
-    to{
-        transform:
-            scale(1.12)
-            translate3d(-15px,-10px,0);
-    }
-}
-
-
-@keyframes dnaAppear{
-
-    0%{
-        opacity:0;
-
-        transform:
-            scale(.2)
-            rotate(-25deg);
-
-        filter:blur(15px);
-    }
-
-    70%{
-        opacity:1;
-
-        transform:
-            scale(1.08)
-            rotate(5deg);
-
-        filter:blur(0);
-    }
-
-    100%{
-        opacity:1;
-
-        transform:
-            scale(1)
-            rotate(0);
-    }
-}
-
-
-@keyframes dnaFloat{
-
-    0%,100%{
-        transform:
-            translateY(0)
-            rotate(0deg);
-    }
-
-    50%{
-        transform:
-            translateY(-12px)
-            rotate(4deg);
-    }
-}
-
-
-@keyframes rungGlow{
-
-    from{
-        opacity:.65;
-
-        box-shadow:
-            0 0 8px #63e6ff;
-    }
-
-    to{
-        opacity:1;
-
-        box-shadow:
-            0 0 15px #63e6ff,
-            0 0 30px #008cff;
-    }
-}
-
-
-@keyframes popText{
-
-    0%{
-        opacity:0;
-
-        transform:
-            scale(.35)
-            translateY(25px);
-
-        filter:blur(12px);
-    }
-
-    65%{
-        opacity:1;
-
-        transform:
-            scale(1.08)
-            translateY(-3px);
-
-        filter:blur(0);
-    }
-
-    100%{
-        opacity:1;
-
-        transform:
-            scale(1)
-            translateY(0);
-    }
-}
-
-
-@keyframes introExit{
-
-    0%{
-        opacity:1;
-        transform:scale(1);
-    }
-
-    70%{
-        opacity:1;
-    }
-
-    100%{
-        opacity:0;
-        visibility:hidden;
-        transform:scale(1.04);
-    }
-}
-
-
-@keyframes mainAppear{
-
-    0%{
-        opacity:0;
-        transform:scale(1.03);
-    }
-
-    100%{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-
-
-/* ================= MOBILE ================= */
-
-@media(max-width:600px){
-
-    nav{
-        padding:18px 5%;
-    }
-
-    nav b{
-        font-size:17px;
-    }
-
-    nav div{
-        gap:13px;
-    }
-
-    nav a{
-        font-size:12px;
-    }
-
-    .introBox{
-        width:95%;
-    }
+@media(max-width:700px){
 
     .dna{
-        transform:scale(.8);
-        margin-bottom:5px;
+        width:175px;
+        height:350px;
+    }
+
+    .strand{
+        width:8px;
+    }
+
+    .strand.left{
+        left:36px;
+    }
+
+    .strand.right{
+        right:36px;
+    }
+
+    .rung{
+        left:40px;
+        width:95px;
+        height:4px;
+    }
+
+    .r1{top:10px}
+    .r2{top:40px}
+    .r3{top:70px}
+    .r4{top:100px}
+    .r5{top:130px}
+    .r6{top:160px}
+    .r7{top:190px}
+    .r8{top:220px}
+    .r9{top:250px}
+    .r10{top:280px}
+    .r11{top:310px}
+    .r12{top:340px}
+
+    .introText{
+        top:70%;
     }
 
     .tech{
-        font-size:31px;
+        font-size:10px;
         letter-spacing:5px;
     }
 
-    .name{
-        font-size:19px;
-        letter-spacing:2px;
+    .myName{
+        font-size:21px;
+        letter-spacing:1px;
     }
 
-    .bio{
-        font-size:45px;
+    .bioAI{
+        font-size:16px;
+        letter-spacing:3px;
+    }
+
+    nav{
+        padding:14px 18px;
+    }
+
+    nav ul{
+        gap:12px;
+    }
+
+    nav a{
+        font-size:8px;
     }
 
     .hero{
-        min-height:100svh;
-
         padding:
-            130px 7%
+            140px
+            8%
             80px;
-
-        background-attachment:scroll;
     }
 
-    h1{
-        font-size:58px;
+    .hero h1{
+        font-size:18vw;
+        letter-spacing:-5px;
     }
 
-    .hero p{
-        font-size:16px;
+    .heroDescription{
+        font-size:13px;
     }
 
-    section{
-        padding:75px 7%;
+    .verticalSection{
+        padding:100px 0;
     }
 
-    .dark{
-        background-attachment:scroll;
+    .sideTitle{
+        display:none;
     }
 
-    .card{
-        padding:24px;
+    .sectionContent{
+        margin-left:0;
+        padding-left:20px;
     }
 
+    .aboutGrid{
+        grid-template-columns:1fr;
+    }
+
+    .aboutCard{
+        min-height:250px;
+    }
+
+    .projectNo{
+        font-size:35px;
+    }
 }
-
 </style>
 </head>
 
@@ -843,309 +955,351 @@ footer{
 <body>
 
 
-<!-- ================= INTRO ================= -->
+<!-- =====================================================
+     INTRO SCREEN
+===================================================== -->
 
-<div class="intro">
+<section class="intro">
 
-    <div class="introBox">
+    <div class="dna">
 
-        <div class="dna">
+        <div class="strand left"></div>
+        <div class="strand right"></div>
 
-            <div class="rung r1"></div>
-            <div class="rung r2"></div>
-            <div class="rung r3"></div>
-            <div class="rung r4"></div>
-            <div class="rung r5"></div>
-            <div class="rung r6"></div>
+        <span class="rung r1"></span>
+        <span class="rung r2"></span>
+        <span class="rung r3"></span>
+        <span class="rung r4"></span>
+        <span class="rung r5"></span>
+        <span class="rung r6"></span>
+        <span class="rung r7"></span>
+        <span class="rung r8"></span>
+        <span class="rung r9"></span>
+        <span class="rung r10"></span>
+        <span class="rung r11"></span>
+        <span class="rung r12"></span>
 
-        </div>
+    </div>
 
+
+    <div class="introText">
 
         <div class="tech">
             TECHNOLOGY
         </div>
 
-
-        <div class="name">
+        <div class="myName">
             HELLO, I'M SOHINI NASKAR
         </div>
 
-
-        <div class="bio">
-            BIOTECH <span>× AI</span>
+        <div class="bioAI">
+            BIOTECH × AI
         </div>
 
     </div>
 
-</div>
+</section>
 
 
 
-<!-- ================= MAIN WEBSITE ================= -->
+<!-- =====================================================
+     MAIN WEBSITE
+===================================================== -->
 
-<main>
-
-
-<nav>
-
-    <b>
-        Sohini Naskar.
-    </b>
-
-    <div>
-
-        <a href="#about">
-            About
-        </a>
-
-        <a href="#skills">
-            Skills
-        </a>
-
-        <a href="#projects">
-            Projects
-        </a>
-
-    </div>
-
-</nav>
+<main class="main">
 
 
+    <!-- NAV -->
 
-<!-- HERO -->
+    <nav>
 
-<header class="hero">
+        <div class="logo">
+            SOHINI<span>.</span>
+        </div>
 
-    <div class="content">
+        <ul>
+            <li>
+                <a href="#about">ABOUT</a>
+            </li>
 
-        <small>
-            BIOTECHNOLOGY × AI
-        </small>
+            <li>
+                <a href="#skills">SKILLS</a>
+            </li>
 
+            <li>
+                <a href="#projects">PROJECTS</a>
+            </li>
+        </ul>
+
+    </nav>
+
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="heroSmall">
+            BIOLOGY / COMPUTATION / FUTURE
+        </div>
 
         <h1>
-
-            BIOLOGY<br>
-
-            <span>
-                MEETS AI
-            </span>
-
+            BIO
+            <span>TECH × AI</span>
         </h1>
 
-
-        <p>
-
-            Biotechnology & AI student exploring
-            Python, data science, genomics and
-            computational biology.
-
+        <p class="heroDescription">
+            Exploring biotechnology through computational thinking,
+            programming, genomic data and artificial intelligence.
         </p>
 
-
         <a
-            class="btn"
+            class="github"
             href="https://github.com/Sohini-17"
-            target="_blank"
-        >
-
-            GitHub →
-
+            target="_blank">
+            EXPLORE GITHUB →
         </a>
 
-    </div>
-
-</header>
+    </section>
 
 
 
-<!-- ABOUT -->
+    <!-- ABOUT -->
 
-<section id="about" class="dark">
+    <section
+        class="verticalSection"
+        id="about">
 
-    <small>
-        01 — ABOUT
-    </small>
+        <div class="sideTitle">
+            01 — ABOUT
+        </div>
 
+        <div class="sectionContent">
 
-    <h2>
-        Biology meets Technology.
-    </h2>
-
-
-    <p class="text">
-
-        I am building my skills in Python,
-        AI, data analysis and biotechnology,
-        with a long-term interest in genomics
-        and computational biology.
-
-    </p>
-
-</section>
+            <h2 class="sectionHeading">
+                Biology<br>
+                meets<br>
+                computation.
+            </h2>
 
 
+            <div class="aboutGrid">
 
-<!-- SKILLS -->
+                <div class="aboutCard">
 
-<section id="skills">
+                    <div class="cardNumber">
+                        01 / BIOLOGY
+                    </div>
 
-    <small>
-        02 — SKILLS
-    </small>
+                    <h3>
+                        Biotechnology
+                    </h3>
+
+                    <p>
+                        Molecular biology, genetics, biotechnology
+                        and biological research form the foundation.
+                    </p>
+
+                </div>
 
 
-    <h2>
-        What I'm Learning
-    </h2>
+                <div class="aboutCard">
 
+                    <div class="cardNumber">
+                        02 / COMPUTATION
+                    </div>
 
-    <div class="skills">
+                    <h3>
+                        Artificial Intelligence
+                    </h3>
 
+                    <p>
+                        Programming, data science and machine learning
+                        applied to biological and genomic problems.
+                    </p>
 
-        <div class="card">
+                </div>
 
-            <h3>
-                🐍 Python
-            </h3>
-
-            <p>
-                Programming & problem solving
-            </p>
+            </div>
 
         </div>
 
+    </section>
 
-        <div class="card">
 
-            <h3>
-                📊 Data
-            </h3>
 
-            <p>
-                Analysis & visualization
-            </p>
+    <!-- SKILLS -->
+
+    <section
+        class="verticalSection"
+        id="skills">
+
+        <div class="sideTitle">
+            02 — SKILLS
+        </div>
+
+        <div class="sectionContent">
+
+            <h2 class="sectionHeading">
+                Current<br>
+                toolkit.
+            </h2>
+
+            <div class="skillList">
+
+                <div class="skill">
+                    Python
+                </div>
+
+                <div class="skill">
+                    NumPy
+                </div>
+
+                <div class="skill">
+                    Pandas
+                </div>
+
+                <div class="skill">
+                    Genetics
+                </div>
+
+                <div class="skill">
+                    Biotechnology
+                </div>
+
+                <div class="skill">
+                    Bioinformatics
+                </div>
+
+                <div class="skill">
+                    Data Science
+                </div>
+
+                <div class="skill">
+                    Machine Learning
+                </div>
+
+                <div class="skill">
+                    SQL
+                </div>
+
+                <div class="skill">
+                    GitHub
+                </div>
+
+            </div>
 
         </div>
 
+    </section>
 
-        <div class="card">
 
-            <h3>
-                🤖 AI / ML
-            </h3>
 
-            <p>
-                Machine learning fundamentals
-            </p>
+    <!-- PROJECTS -->
+
+    <section
+        class="verticalSection"
+        id="projects">
+
+        <div class="sideTitle">
+            03 — PROJECTS
+        </div>
+
+        <div class="sectionContent">
+
+            <h2 class="sectionHeading">
+                Selected<br>
+                experiments.
+            </h2>
+
+
+            <div class="project">
+
+                <div>
+
+                    <div class="projectTitle">
+                        Genomic Data
+                    </div>
+
+                    <p class="projectDescription">
+                        Python-based exploration of biological
+                        and genomic datasets.
+                    </p>
+
+                </div>
+
+                <div class="projectNo">
+                    01
+                </div>
+
+            </div>
+
+
+            <div class="project">
+
+                <div>
+
+                    <div class="projectTitle">
+                        Bio × AI
+                    </div>
+
+                    <p class="projectDescription">
+                        Exploring machine learning applications
+                        in biotechnology.
+                    </p>
+
+                </div>
+
+                <div class="projectNo">
+                    02
+                </div>
+
+            </div>
+
+
+            <div class="project">
+
+                <div>
+
+                    <div class="projectTitle">
+                        Python Lab
+                    </div>
+
+                    <p class="projectDescription">
+                        Computational experiments and
+                        programming projects.
+                    </p>
+
+                </div>
+
+                <div class="projectNo">
+                    03
+                </div>
+
+            </div>
 
         </div>
 
-
-        <div class="card">
-
-            <h3>
-                🧬 Biotechnology
-            </h3>
-
-            <p>
-                Biology & genomics
-            </p>
-
-        </div>
-
-
-    </div>
-
-</section>
+    </section>
 
 
 
-<!-- PROJECTS -->
+    <!-- FOOTER -->
 
-<section id="projects" class="dark">
+    <footer>
 
-    <small>
-        03 — PROJECTS
-    </small>
+        <strong>
+            SOHINI NASKAR
+        </strong>
 
+        <br><br>
 
-    <h2>
-        My Work
-    </h2>
+        BIOTECHNOLOGY × AI
 
-
-    <div class="projects">
-
-
-        <div class="card">
-
-            <h3>
-                01 — Python
-            </h3>
-
-            <p>
-                Python learning projects.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <h3>
-                02 — Data Analysis
-            </h3>
-
-            <p>
-                Data-based projects.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <h3>
-                03 — Biotechnology
-            </h3>
-
-            <p>
-                Future biotech projects.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <h3>
-                04 — AI for Biology
-            </h3>
-
-            <p>
-                AI + biology projects.
-            </p>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-<footer>
-
-    © 2026 Sohini Naskar
-    | Biotechnology × AI 🧬
-
-</footer>
+    </footer>
 
 
 </main>
-
 
 </body>
 </html>
