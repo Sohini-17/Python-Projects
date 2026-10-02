@@ -1,134 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shree | Biotechnology × AI</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #f5f7fb;
-            color: #222;
-        }
-
-        header {
-            background: #171717;
-            color: white;
-            text-align: center;
-            padding: 70px 20px;
-        }
-
-        header h1 {
-            font-size: 42px;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 18px;
-            color: #ccc;
-        }
-
-        section {
-            max-width: 900px;
-            margin: auto;
-            padding: 45px 20px;
-        }
-
-        h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        .skills span {
-            display: inline-block;
-            background: white;
-            padding: 10px 16px;
-            margin: 6px;
-            border-radius: 20px;
-        }
-
-        .project {
-            background: white;
-            padding: 25px;
-            margin: 20px 0;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-
-        .project h3 {
-            margin-top: 0;
-        }
-
-        .button {
-            display: inline-block;
-            background: #171717;
-            color: white;
-            padding: 10px 18px;
-            text-decoration: none;
-            border-radius: 8px;
-            margin-top: 10px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 25px;
-            background: #171717;
-            color: white;
-        }
-    </style>
+<style>
+*{box-sizing:border-box;margin:0}
+body{font-family:Arial;background:#07111f;color:white;line-height:1.6}
+nav{padding:20px 8%;display:flex;justify-content:space-between}
+nav a{color:#aaa;text-decoration:none;margin-left:20px}
+.hero{min-height:85vh;padding:150px 8%;background:radial-gradient(circle at 80%,#16466b,#07111f 45%)}
+small{color:#55b8ff;letter-spacing:3px}
+h1{font-size:clamp(50px,9vw,90px);line-height:1;margin:20px 0}
+h1 span{color:#55b8ff}
+.hero p{max-width:600px;color:#aebdca;font-size:18px}
+.btn{display:inline-block;margin-top:25px;padding:12px 22px;
+background:#55b8ff;color:#07111f;text-decoration:none;border-radius:7px;font-weight:bold}
+section{padding:80px 8%}
+.dark{background:#0b1726}
+h2{font-size:38px;margin:10px 0 30px}
+.text{max-width:750px;color:#aebdca}
+.skills,.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}
+.card{background:#0d1d30;border:1px solid #193650;padding:25px;border-radius:12px}
+.card h3{color:#55b8ff;margin-bottom:8px}
+.card p{color:#9eafbf;font-size:14px}
+footer{text-align:center;padding:25px;color:#71869a;border-top:1px solid #193650}
+</style>
 </head>
 
 <body>
 
-<header>
-    <h1>Hi, I'm Sohini Naskar 👋</h1>
-    <p>Python Learner | Biotechnology & AI Student</p>
+<nav>
+<b>SHREE.</b>
+<div>
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
+</div>
+</nav>
+
+<header class="hero">
+<small>HELLO, I'M SHREE</small>
+<h1>BIOTECH<br><span>× AI</span></h1>
+<p>Biotechnology & AI student exploring Python, data science and computational biology.</p>
+<a class="btn" href="https://github.com/Sohini-17">GitHub →</a>
 </header>
 
-<section>
-    <h2>About Me</h2>
-    <p>
-        I am learning Python, GitHub and AI.
-        I am interested in Biotechnology and technology.
-        This website showcases my projects and learning journey.
-    </p>
+<section id="about" class="dark">
+<small>01 — ABOUT</small>
+<h2>Biology meets Technology.</h2>
+<p class="text">
+I am building my skills in Python, AI, data analysis and biotechnology,
+with a long-term interest in genomics and computational biology.
+</p>
 </section>
 
-<section>
-    <h2>Skills</h2>
+<section id="skills">
+<small>02 — SKILLS</small>
+<h2>What I’m Learning</h2>
 
-    <div class="skills">
-        <span>Python</span>
-        <span>GitHub</span>
-        <span>AI</span>
-        <span>Biotechnology</span>
-        <span>HTML</span>
-        <span>CSS</span>
-    </div>
+<div class="skills">
+<div class="card"><h3>🐍 Python</h3><p>Programming & problem solving</p></div>
+<div class="card"><h3>📊 Data</h3><p>Analysis & visualization</p></div>
+<div class="card"><h3>🤖 AI / ML</h3><p>Machine learning fundamentals</p></div>
+<div class="card"><h3>🧬 Biotechnology</h3><p>Biology & genomics</p></div>
+</div>
 </section>
 
-<section>
-    <h2>My Projects</h2>
+<section id="projects" class="dark">
+<small>03 — PROJECTS</small>
+<h2>My Work</h2>
 
-    <div class="project">
-        <h3>🧮 Python Calculator</h3>
-        <p>
-            A simple calculator project created using Python functions
-            and conditional statements.
-        </p>
-
-        <a class="button"
-           href="https://github.com/Sohini-17/Python-Projects">
-           View Project
-        </a>
-    </div>
-
+<div class="projects">
+<div class="card"><h3>01 — Python</h3><p>Python learning projects.</p></div>
+<div class="card"><h3>02 — Data Analysis</h3><p>Data-based projects.</p></div>
+<div class="card"><h3>03 — Biotechnology</h3><p>Future biotech projects.</p></div>
+<div class="card"><h3>04 — AI for Biology</h3><p>AI + biology projects.</p></div>
+</div>
 </section>
 
 <footer>
-    © 2026 My Portfolio
+© 2026 Sohini Naskar | Biotechnology × AI
 </footer>
 
 </body>
