@@ -6,33 +6,352 @@
 <title>Sohini Naskar | Biotechnology × AI</title>
 
 <style>
-*{box-sizing:border-box;margin:0}
-body{font-family:Arial;background:#07111f;color:white;line-height:1.6}
-nav{padding:20px 8%;display:flex;justify-content:space-between}
-nav a{color:#aaa;text-decoration:none;margin-left:20px}
-.hero{min-height:85vh;padding:150px 8%;background:radial-gradient(circle at 80% 30%,#123c5a,#050b14 45%),linear-gradient(135deg,#050b14,#0b1726)}
-small{color:#55b8ff;letter-spacing:3px}
-h1{font-size:clamp(50px,9vw,90px);line-height:1;margin:20px 0}
-h1 span{color:#55b8ff}
-.hero p{max-width:600px;color:#aebdca;font-size:18px}
-.btn{display:inline-block;margin-top:25px;padding:12px 22px;
-background:#55b8ff;color:#07111f;text-decoration:none;border-radius:7px;font-weight:bold}
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:Arial,sans-serif;
+background:#050b14;
+color:white;
+overflow-x:hidden;
+}
+
+/* ===== INTRO ===== */
+
+.intro{
+position:fixed;
+inset:0;
+z-index:999;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:#050b14;
+animation:hideIntro 1s ease 6s forwards;
+}
+
+.introBox{
+position:relative;
+}
+
+/* DNA */
+
+.dna{
+width:150px;
+height:280px;
+margin:auto;
+position:relative;
+animation:dnaMove 3s ease-in-out infinite;
+}
+
+.dna:before,
+.dna:after{
+content:"";
+position:absolute;
+top:0;
+width:7px;
+height:280px;
+border-radius:50%;
+background:#63e6ff;
+box-shadow:0 0 20px #63e6ff;
+}
+
+.dna:before{
+left:35px;
+transform:rotate(18deg);
+}
+
+.dna:after{
+right:35px;
+transform:rotate(-18deg);
+}
+
+.rung{
+position:absolute;
+left:35px;
+width:80px;
+height:4px;
+background:#63e6ff;
+box-shadow:0 0 15px #63e6ff;
+}
+
+.r1{top:25px}
+.r2{top:70px}
+.r3{top:115px}
+.r4{top:160px}
+.r5{top:205px}
+.r6{top:250px}
+
+/* TECHNOLOGY */
+
+.tech{
+margin-top:20px;
+font-size:clamp(28px,6vw,55px);
+font-weight:bold;
+letter-spacing:7px;
+color:#63e6ff;
+opacity:0;
+animation:pop 1s ease 1.5s forwards;
+}
+
+/* NAME */
+
+.name{
+margin-top:22px;
+font-size:clamp(20px,4vw,38px);
+font-weight:bold;
+letter-spacing:3px;
+opacity:0;
+animation:pop 1s ease 3s forwards;
+}
+
+/* BIOTECH AI */
+
+.bio{
+margin-top:25px;
+font-size:clamp(45px,9vw,90px);
+font-weight:bold;
+opacity:0;
+animation:pop 1s ease 4.2s forwards;
+}
+
+.bio span{
+color:#63e6ff;
+}
+
+/* ===== MAIN ===== */
+
+main{
+opacity:0;
+animation:showMain 1.5s ease 6s forwards;
+}
+
+nav{
+padding:20px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:absolute;
+width:100%;
+z-index:5;
+}
+
+nav b{
+font-size:22px;
+color:#63e6ff;
+}
+
+nav a{
+color:#aaa;
+text-decoration:none;
+margin-left:20px;
+}
+
+nav a:hover{
+color:#63e6ff;
+}
+
+.hero{
+min-height:100vh;
+padding:150px 8%;
+display:flex;
+align-items:center;
+position:relative;
+background:
+radial-gradient(circle at 80% 25%,#174b69,#07111f 45%);
+}
+
+.hero:before{
+content:"🧬";
+position:absolute;
+right:7%;
+top:25%;
+font-size:230px;
+opacity:.07;
+}
+
+.content{
+position:relative;
+z-index:2;
+}
+
+small{
+color:#63e6ff;
+letter-spacing:3px;
+font-size:18px;
+}
+
+h1{
+font-size:clamp(55px,9vw,95px);
+line-height:.95;
+margin:20px 0;
+}
+
+h1 span{color:#63e6ff}
+
+.hero p{
+max-width:620px;
+color:#aebdca;
+font-size:18px;
+}
+
+.btn{
+display:inline-block;
+margin-top:25px;
+padding:13px 24px;
+background:#63e6ff;
+color:#07111f;
+text-decoration:none;
+border-radius:8px;
+font-weight:bold;
+box-shadow:0 0 25px #63e6ff55;
+}
+
 section{padding:80px 8%}
-.dark{background:#0b1726}
-h2{font-size:38px;margin:10px 0 30px}
-.text{max-width:750px;color:#aebdca}
-.skills,.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}
-.card{background:#0d1d30;border:1px solid #193650;padding:25px;border-radius:12px}
-.card h3{color:#55b8ff;margin-bottom:8px}
-.card p{color:#9eafbf;font-size:14px}
-footer{text-align:center;padding:25px;color:#71869a;border-top:1px solid #193650}
+
+.dark{background:#081522}
+
+h2{
+font-size:38px;
+margin:10px 0 30px;
+}
+
+.text{
+max-width:750px;
+color:#aebdca;
+}
+
+.skills,.projects{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:18px;
+}
+
+.card{
+background:#0c1d2e;
+border:1px solid #193f52;
+padding:25px;
+border-radius:14px;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-7px);
+border-color:#63e6ff;
+box-shadow:0 0 25px #63e6ff30;
+}
+
+.card h3{
+color:#63e6ff;
+margin-bottom:8px;
+}
+
+.card p{
+color:#9eafbf;
+font-size:14px;
+}
+
+footer{
+text-align:center;
+padding:25px;
+color:#71869a;
+border-top:1px solid #193f52;
+}
+
+/* ===== ANIMATIONS ===== */
+
+@keyframes pop{
+0%{
+opacity:0;
+transform:scale(.5);
+}
+70%{
+transform:scale(1.08);
+}
+100%{
+opacity:1;
+transform:scale(1);
+}
+}
+
+@keyframes dnaMove{
+0%,100%{transform:rotate(0deg) translateY(0)}
+50%{transform:rotate(5deg) translateY(-12px)}
+}
+
+@keyframes showMain{
+to{opacity:1}
+}
+
+@keyframes hideIntro{
+to{
+opacity:0;
+visibility:hidden;
+}
+}
+
+@media(max-width:600px){
+
+nav a{
+font-size:13px;
+margin-left:10px;
+}
+
+nav b{
+font-size:18px;
+}
+
+.hero{
+padding-top:150px;
+}
+
+.hero:before{
+font-size:140px;
+right:-20px;
+}
+
+h1{
+font-size:58px;
+}
+
+}
 </style>
 </head>
 
 <body>
 
+<!-- INTRO -->
+
+<div class="intro">
+
+<div class="introBox">
+
+<div class="dna">
+<div class="rung r1"></div>
+<div class="rung r2"></div>
+<div class="rung r3"></div>
+<div class="rung r4"></div>
+<div class="rung r5"></div>
+<div class="rung r6"></div>
+</div>
+
+<div class="tech">TECHNOLOGY</div>
+
+<div class="name">HELLO, I'M SOHINI NASKAR</div>
+
+<div class="bio">BIOTECH <span>× AI</span></div>
+
+</div>
+
+</div>
+
+
+<!-- MAIN WEBSITE -->
+
+<main>
+
 <nav>
 <b>Sohini Naskar.</b>
+
 <div>
 <a href="#about">About</a>
 <a href="#skills">Skills</a>
@@ -40,49 +359,112 @@ footer{text-align:center;padding:25px;color:#71869a;border-top:1px solid #193650
 </div>
 </nav>
 
+
 <header class="hero">
-<small style="font-size:22px">HELLO, I'M SOHINI NASKAR</small>
-<h1>BIOTECH<br><span>× AI</span></h1>
-<p>Biotechnology & AI student exploring Python, data science and computational biology.</p>
-<a class="btn" href="https://github.com/Sohini-17">GitHub →</a>
+
+<div class="content">
+
+<small>BIOTECHNOLOGY × AI</small>
+
+<h1>
+BIOLOGY<br>
+<span>MEETS AI</span>
+</h1>
+
+<p>
+Biotechnology & AI student exploring Python,
+data science, genomics and computational biology.
+</p>
+
+<a class="btn" href="https://github.com/Sohini-17">
+GitHub →
+</a>
+
+</div>
+
 </header>
 
+
 <section id="about" class="dark">
+
 <small>01 — ABOUT</small>
 <h2>Biology meets Technology.</h2>
+
 <p class="text">
 I am building my skills in Python, AI, data analysis and biotechnology,
 with a long-term interest in genomics and computational biology.
 </p>
+
 </section>
 
+
 <section id="skills">
+
 <small>02 — SKILLS</small>
-<h2>What I’m Learning</h2>
+<h2>What I'm Learning</h2>
 
 <div class="skills">
-<div class="card"><h3>🐍 Python</h3><p>Programming & problem solving</p></div>
-<div class="card"><h3>📊 Data</h3><p>Analysis & visualization</p></div>
-<div class="card"><h3>🤖 AI / ML</h3><p>Machine learning fundamentals</p></div>
-<div class="card"><h3>🧬 Biotechnology</h3><p>Biology & genomics</p></div>
+
+<div class="card">
+<h3>🐍 Python</h3>
+<p>Programming & problem solving</p>
+</div>
+
+<div class="card">
+<h3>📊 Data</h3>
+<p>Analysis & visualization</p>
+</div>
+
+<div class="card">
+<h3>🤖 AI / ML</h3>
+<p>Machine learning fundamentals</p>
+</div>
+
+<div class="card">
+<h3>🧬 Biotechnology</h3>
+<p>Biology & genomics</p>
+</div>
+
 </div>
 </section>
 
+
 <section id="projects" class="dark">
+
 <small>03 — PROJECTS</small>
 <h2>My Work</h2>
 
 <div class="projects">
-<div class="card"><h3>01 — Python</h3><p>Python learning projects.</p></div>
-<div class="card"><h3>02 — Data Analysis</h3><p>Data-based projects.</p></div>
-<div class="card"><h3>03 — Biotechnology</h3><p>Future biotech projects.</p></div>
-<div class="card"><h3>04 — AI for Biology</h3><p>AI + biology projects.</p></div>
+
+<div class="card">
+<h3>01 — Python</h3>
+<p>Python learning projects.</p>
+</div>
+
+<div class="card">
+<h3>02 — Data Analysis</h3>
+<p>Data-based projects.</p>
+</div>
+
+<div class="card">
+<h3>03 — Biotechnology</h3>
+<p>Future biotech projects.</p>
+</div>
+
+<div class="card">
+<h3>04 — AI for Biology</h3>
+<p>AI + biology projects.</p>
+</div>
+
 </div>
 </section>
 
+
 <footer>
-© 2026 Sohini Naskar | Biotechnology × AI
+© 2026 Sohini Naskar | Biotechnology × AI 🧬
 </footer>
+
+</main>
 
 </body>
 </html>
