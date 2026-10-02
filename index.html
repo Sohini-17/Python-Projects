@@ -1,970 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Sohini Naskar | Biotechnology × AI</title>
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#08030f;
-    color:#fff;
-    font-family:Arial,Helvetica,sans-serif;
-    overflow-x:hidden;
-}
-
-
-/* =====================================================
-   DNA INTRO
-===================================================== */
-
-.intro{
-    position:fixed;
-    inset:0;
-    z-index:9999;
-    background:
-        radial-gradient(circle at center,
-        #123b78 0%,
-        #071a3d 35%,
-        #020713 75%);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-
-    animation:introDisappear 1.2s ease 9.5s forwards;
-}
-
-.intro::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-        linear-gradient(90deg,
-        transparent,
-        rgba(60,210,255,.04),
-        transparent);
-    pointer-events:none;
-}
-
-
-/* DNA container */
-
-.dna{
-    position:absolute;
-    width:230px;
-    height:440px;
-    left:50%;
-    top:43%;
-    transform:translate(-50%,-50%);
-    animation:dnaPop 1s cubic-bezier(.15,.9,.25,1.3) 2.5s forwards;
-}
-
-
-/* DNA strands */
-
-.strand{
-    position:absolute;
-    top:0;
-    width:9px;
-    height:100%;
-    border-radius:50%;
-
-    background:#62eaff;
-
-    box-shadow:
-        0 0 8px #62eaff,
-        0 0 20px #00cfff,
-        0 0 45px #008cff;
-}
-
-.strand.left{
-    left:48px;
-
-    animation:
-        leftStrand 2.7s ease-out forwards,
-        floatingLeft 3s ease-in-out 3.6s infinite;
-}
-
-.strand.right{
-    right:48px;
-
-    animation:
-        rightStrand 2.7s ease-out forwards,
-        floatingRight 3s ease-in-out 3.6s infinite;
-}
-
-
-/* DNA horizontal connections */
-
-.rung{
-    position:absolute;
-    left:53px;
-    width:124px;
-    height:5px;
-    border-radius:20px;
-
-    background:#72edff;
-
-    box-shadow:
-        0 0 8px #72edff,
-        0 0 20px #00cfff;
-
-    opacity:0;
-    transform-origin:left center;
-
-    animation:rungShow .35s ease forwards;
-}
-
-.r1{top:15px;animation-delay:.15s}
-.r2{top:51px;animation-delay:.30s}
-.r3{top:87px;animation-delay:.45s}
-.r4{top:123px;animation-delay:.60s}
-.r5{top:159px;animation-delay:.75s}
-.r6{top:195px;animation-delay:.90s}
-.r7{top:231px;animation-delay:1.05s}
-.r8{top:267px;animation-delay:1.20s}
-.r9{top:303px;animation-delay:1.35s}
-.r10{top:339px;animation-delay:1.50s}
-.r11{top:375px;animation-delay:1.65s}
-.r12{top:411px;animation-delay:1.80s}
-
-
-/* alternating DNA angle */
-
-.r1,.r3,.r5,.r7,.r9,.r11{
-    transform:rotate(18deg);
-}
-
-.r2,.r4,.r6,.r8,.r10,.r12{
-    transform:rotate(-18deg);
-}
-
-
-/* DNA animations */
-
-@keyframes leftStrand{
-
-    0%{
-        transform:translateX(-190px) rotate(-25deg);
-        opacity:0;
-    }
-
-    50%{
-        opacity:1;
-    }
-
-    100%{
-        transform:translateX(0) rotate(18deg);
-        opacity:1;
-    }
-}
-
-@keyframes rightStrand{
-
-    0%{
-        transform:translateX(190px) rotate(25deg);
-        opacity:0;
-    }
-
-    50%{
-        opacity:1;
-    }
-
-    100%{
-        transform:translateX(0) rotate(-18deg);
-        opacity:1;
-    }
-}
-
-@keyframes rungShow{
-
-    0%{
-        opacity:0;
-        transform:scaleX(0);
-    }
-
-    100%{
-        opacity:1;
-        transform:scaleX(1);
-    }
-}
-
-@keyframes dnaPop{
-
-    0%{
-        transform:translate(-50%,-50%) scale(.75);
-    }
-
-    65%{
-        transform:translate(-50%,-50%) scale(1.15);
-    }
-
-    100%{
-        transform:translate(-50%,-50%) scale(1);
-    }
-}
-
-@keyframes floatingLeft{
-
-    0%,100%{
-        margin-top:0;
-    }
-
-    50%{
-        margin-top:-8px;
-    }
-}
-
-@keyframes floatingRight{
-
-    0%,100%{
-        margin-top:0;
-    }
-
-    50%{
-        margin-top:8px;
-    }
-}
-
-
-/* =====================================================
-   INTRO TEXT
-===================================================== */
-
-.introText{
-    position:absolute;
-    top:72%;
-    width:100%;
-    text-align:center;
-    z-index:10;
-}
-
-.introText div{
-    opacity:0;
-    transform:translateY(20px);
-    animation:textAppear .8s ease forwards;
-}
-
-.tech{
-    color:#67eaff;
-    font-size:14px;
-    letter-spacing:8px;
-    animation-delay:3.6s !important;
-}
-
-.myName{
-    margin-top:18px;
-    font-size:clamp(24px,5vw,48px);
-    font-weight:bold;
-    letter-spacing:3px;
-    animation-delay:4.9s !important;
-}
-
-.bioAI{
-    margin-top:17px;
-    color:#c993ff;
-    font-size:clamp(18px,3vw,30px);
-    letter-spacing:6px;
-    animation-delay:6.2s !important;
-}
-
-@keyframes textAppear{
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-@keyframes introDisappear{
-
-    to{
-        opacity:0;
-        visibility:hidden;
-        pointer-events:none;
-    }
-}
-
-
-/* =====================================================
-   MAIN PAGE
-===================================================== */
-
-.main{
-    min-height:100vh;
-    position:relative;
-
-    background:
-        radial-gradient(
-            ellipse at 75% 15%,
-            rgba(177,83,255,.35),
-            transparent 32%
-        ),
-        radial-gradient(
-            ellipse at 20% 55%,
-            rgba(103,32,171,.28),
-            transparent 35%
-        ),
-        linear-gradient(
-            145deg,
-            #0b0314,
-            #1b0730 45%,
-            #07020e
-        );
-}
-
-
-/* grid */
-
-.main::before{
-
-    content:"";
-
-    position:fixed;
-    inset:0;
-
-    background:
-        linear-gradient(
-            rgba(255,255,255,.035) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.025) 1px,
-            transparent 1px
-        );
-
-    background-size:
-        100% 80px,
-        80px 100%;
-
-    pointer-events:none;
-}
-
-
-/* =====================================================
-   NAVIGATION
-===================================================== */
-
-nav{
-
-    position:fixed;
-
-    top:24px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    width:min(1150px,90%);
-
-    padding:17px 24px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    border:1px solid rgba(220,170,255,.18);
-
-    border-radius:40px;
-
-    background:rgba(20,5,35,.48);
-
-    backdrop-filter:blur(20px);
-
-    z-index:100;
-}
-
-.logo{
-
-    font-size:17px;
-    font-weight:bold;
-    letter-spacing:3px;
-}
-
-.logo span{
-    color:#ca83ff;
-}
-
-nav ul{
-
-    display:flex;
-    gap:30px;
-
-    list-style:none;
-}
-
-nav a{
-
-    text-decoration:none;
-    color:#cfc5d8;
-
-    font-size:11px;
-    letter-spacing:2px;
-
-    transition:.3s;
-}
-
-nav a:hover{
-    color:#d48cff;
-}
-
-
-/* =====================================================
-   HERO
-===================================================== */
-
-.hero{
-
-    min-height:100vh;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-
-    padding:
-        150px
-        8%
-        100px;
-
-    position:relative;
-}
-
-
-/* vertical side number */
-
-.hero::before{
-
-    content:"01";
-
-    position:absolute;
-
-    left:4%;
-    top:50%;
-
-    writing-mode:vertical-rl;
-
-    color:#754394;
-
-    letter-spacing:7px;
-    font-size:11px;
-}
-
-
-.heroSmall{
-
-    color:#c084ff;
-
-    font-size:11px;
-
-    letter-spacing:8px;
-
-    margin-bottom:30px;
-}
-
-
-.hero h1{
-
-    max-width:1000px;
-
-    font-size:
-        clamp(55px,10vw,145px);
-
-    line-height:.82;
-
-    letter-spacing:-7px;
-
-    font-weight:800;
-}
-
-
-.hero h1 span{
-
-    display:block;
-
-    color:transparent;
-
-    -webkit-text-stroke:
-        1px #c77cff;
-
-    margin-left:8%;
-}
-
-
-.heroDescription{
-
-    max-width:600px;
-
-    margin-top:45px;
-
-    color:#aaa0b3;
-
-    font-size:15px;
-
-    line-height:1.8;
-}
-
-
-.github{
-
-    display:inline-block;
-
-    width:max-content;
-
-    margin-top:35px;
-
-    padding:15px 28px;
-
-    border-radius:40px;
-
-    text-decoration:none;
-
-    color:white;
-
-    border:1px solid #a95be0;
-
-    background:rgba(150,60,220,.12);
-
-    box-shadow:
-        0 0 35px rgba(180,80,255,.13);
-
-    transition:.3s;
-}
-
-.github:hover{
-
-    background:rgba(180,80,255,.25);
-
-    transform:translateY(-3px);
-}
-
-
-/* =====================================================
-   VERTICAL ABOUT
-===================================================== */
-
-.verticalSection{
-
-    position:relative;
-
-    width:min(1150px,88%);
-
-    margin:auto;
-
-    padding:150px 0;
-}
-
-
-.sideTitle{
-
-    position:absolute;
-
-    left:0;
-    top:150px;
-
-    writing-mode:vertical-rl;
-
-    transform:rotate(180deg);
-
-    font-size:10px;
-
-    letter-spacing:7px;
-
-    color:#8e55a9;
-}
-
-
-.sectionContent{
-
-    margin-left:100px;
-
-    border-left:
-        1px solid rgba(211,137,255,.14);
-
-    padding-left:70px;
-}
-
-
-.sectionHeading{
-
-    font-size:
-        clamp(38px,6vw,75px);
-
-    line-height:.95;
-
-    margin-bottom:50px;
-
-    letter-spacing:-3px;
-}
-
-
-/* =====================================================
-   ABOUT CARDS
-===================================================== */
-
-.aboutGrid{
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:20px;
-}
-
-
-.aboutCard{
-
-    min-height:300px;
-
-    padding:35px;
-
-    border:
-        1px solid
-        rgba(214,150,255,.15);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(137,53,190,.16),
-            rgba(20,5,35,.35)
-        );
-
-    backdrop-filter:blur(18px);
-
-    position:relative;
-
-    overflow:hidden;
-
-    transition:.4s;
-}
-
-
-.aboutCard::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:150px;
-    height:150px;
-
-    right:-70px;
-    bottom:-70px;
-
-    border-radius:50%;
-
-    background:#a74dff;
-
-    filter:blur(70px);
-
-    opacity:.25;
-}
-
-
-.aboutCard:hover{
-
-    transform:translateY(-8px);
-
-    border-color:
-        rgba(210,130,255,.5);
-
-    box-shadow:
-        0 25px 80px
-        rgba(132,45,190,.2);
-}
-
-
-.cardNumber{
-
-    color:#9655c4;
-
-    font-size:11px;
-
-    letter-spacing:4px;
-}
-
-
-.aboutCard h3{
-
-    margin-top:55px;
-
-    font-size:28px;
-}
-
-
-.aboutCard p{
-
-    margin-top:18px;
-
-    color:#a69baa;
-
-    line-height:1.8;
-
-    max-width:420px;
-}
-
-
-/* =====================================================
-   SKILLS
-===================================================== */
-
-.skillList{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:12px;
-}
-
-
-.skill{
-
-    padding:14px 22px;
-
-    border-radius:40px;
-
-    border:
-        1px solid
-        rgba(211,132,255,.22);
-
-    color:#cdb1da;
-
-    background:
-        rgba(121,40,171,.08);
-
-    transition:.3s;
-}
-
-
-.skill:hover{
-
-    border-color:#c47aff;
-
-    color:white;
-
-    transform:translateY(-3px);
-}
-
-
-/* =====================================================
-   PROJECTS
-===================================================== */
-
-.project{
-
-    min-height:180px;
-
-    padding:35px 0;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.09);
-}
-
-
-.projectTitle{
-
-    font-size:
-        clamp(24px,4vw,45px);
-
-    letter-spacing:-1px;
-}
-
-
-.projectDescription{
-
-    color:#918697;
-
-    margin-top:12px;
-
-    line-height:1.6;
-}
-
-
-.projectNo{
-
-    font-size:70px;
-
-    color:#51216b;
-
-    font-weight:bold;
-}
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-footer{
-
-    padding:100px 20px;
-
-    text-align:center;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.08);
-
-    color:#6f6278;
-
-    letter-spacing:2px;
-}
-
-footer strong{
-    color:#c785ff;
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:700px){
-
-    .dna{
-        width:175px;
-        height:350px;
-    }
-
-    .strand{
-        width:8px;
-    }
-
-    .strand.left{
-        left:36px;
-    }
-
-    .strand.right{
-        right:36px;
-    }
-
-    .rung{
-        left:40px;
-        width:95px;
-        height:4px;
-    }
-
-    .r1{top:10px}
-    .r2{top:40px}
-    .r3{top:70px}
-    .r4{top:100px}
-    .r5{top:130px}
-    .r6{top:160px}
-    .r7{top:190px}
-    .r8{top:220px}
-    .r9{top:250px}
-    .r10{top:280px}
-    .r11{top:310px}
-    .r12{top:340px}
-
-    .introText{
-        top:70%;
-    }
-
-    .tech{
-        font-size:10px;
-        letter-spacing:5px;
-    }
-
-    .myName{
-        font-size:21px;
-        letter-spacing:1px;
-    }
-
-    .bioAI{
-        font-size:16px;
-        letter-spacing:3px;
-    }
-
-    nav{
-        padding:14px 18px;
-    }
-
-    nav ul{
-        gap:12px;
-    }
-
-    nav a{
-        font-size:8px;
-    }
-
-    .hero{
-        padding:
-            140px
-            8%
-            80px;
-    }
-
-    .hero h1{
-        font-size:18vw;
-        letter-spacing:-5px;
-    }
-
-    .heroDescription{
-        font-size:13px;
-    }
-
-    .verticalSection{
-        padding:100px 0;
-    }
-
-    .sideTitle{
-        display:none;
-    }
-
-    .sectionContent{
-        margin-left:0;
-        padding-left:20px;
-    }
-
-    .aboutGrid{
-        grid-template-columns:1fr;
-    }
-
-    .aboutCard{
-        min-height:250px;
-    }
-
-    .projectNo{
-        font-size:35px;
-    }
-}
-</style>
-</head>
-
-
-<body>
-
-
-<!-- =====================================================
-     INTRO SCREEN
-===================================================== -->
-
+<!-- FIRST SCREEN -->
 <section class="intro">
 
     <div class="dna">
 
-        <div class="strand left"></div>
-        <div class="strand right"></div>
+        <div class="strand strand-left"></div>
+        <div class="strand strand-right"></div>
 
         <span class="rung r1"></span>
         <span class="rung r2"></span>
@@ -981,19 +21,18 @@ footer strong{
 
     </div>
 
+    <div class="intro-text">
 
-    <div class="introText">
-
-        <div class="tech">
+        <div class="technology">
             TECHNOLOGY
         </div>
 
-        <div class="myName">
+        <div class="name">
             HELLO, I'M SOHINI NASKAR
         </div>
 
-        <div class="bioAI">
-            BIOTECH × AI
+        <div class="biotech">
+            BIOTECH <span>× AI</span>
         </div>
 
     </div>
@@ -1001,305 +40,310 @@ footer strong{
 </section>
 
 
+<style>
 
-<!-- =====================================================
-     MAIN WEBSITE
-===================================================== -->
+/* INTRO */
 
-<main class="main">
+.intro{
+    position:fixed;
+    inset:0;
+    z-index:9999;
 
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-    <!-- NAV -->
+    background:
+    radial-gradient(circle at center,
+    #123b78,
+    #06162f 45%,
+    #020711);
 
-    <nav>
+    overflow:hidden;
+}
 
-        <div class="logo">
-            SOHINI<span>.</span>
-        </div>
 
-        <ul>
-            <li>
-                <a href="#about">ABOUT</a>
-            </li>
+/* DNA */
 
-            <li>
-                <a href="#skills">SKILLS</a>
-            </li>
+@media (max-width: 600px){
+    
+.dna{
+    position:absolute;
 
-            <li>
-                <a href="#projects">PROJECTS</a>
-            </li>
-        </ul>
+    width:300px;
+    height:560px;
 
-    </nav>
+    left:50%;
+    top:43%;
 
+    transform:translate(-50%,-50%) scale(.7);
 
+    animation:
+    dnaPop .8s 2.2s
+    cubic-bezier(.2,1.4,.3,1)
+    forwards;
+}
 
-    <!-- HERO -->
 
-    <section class="hero">
+/* STRANDS */
 
-        <div class="heroSmall">
-            BIOLOGY / COMPUTATION / FUTURE
-        </div>
+.strand{
+    position:absolute;
 
-        <h1>
-            BIO
-            <span>TECH × AI</span>
-        </h1>
+    top:10px;
 
-        <p class="heroDescription">
-            Exploring biotechnology through computational thinking,
-            programming, genomic data and artificial intelligence.
-        </p>
+    width:7px;
+    height:530px;
 
-        <a
-            class="github"
-            href="https://github.com/Sohini-17"
-            target="_blank">
-            EXPLORE GITHUB →
-        </a>
+    border-radius:20px;
 
-    </section>
+    background:#61ecff;
 
+    box-shadow:
+    0 0 8px #61ecff,
+    0 0 20px #00d9ff,
+    0 0 40px #008cff;
+}
 
 
-    <!-- ABOUT -->
+/* LEFT → CENTER */
 
-    <section
-        class="verticalSection"
-        id="about">
+.strand-left{
+    left:58px;
 
-        <div class="sideTitle">
-            01 — ABOUT
-        </div>
+    transform:
+    rotate(-15deg)
+    translateX(-150px);
 
-        <div class="sectionContent">
+    opacity:0;
 
-            <h2 class="sectionHeading">
-                Biology<br>
-                meets<br>
-                computation.
-            </h2>
+    animation:
+    leftDNA 1.5s
+    cubic-bezier(.2,.8,.2,1)
+    .1s forwards;
+}
 
 
-            <div class="aboutGrid">
+/* RIGHT → CENTER */
 
-                <div class="aboutCard">
+.strand-right{
+    right:58px;
 
-                    <div class="cardNumber">
-                        01 / BIOLOGY
-                    </div>
+    transform:
+    rotate(15deg)
+    translateX(150px);
 
-                    <h3>
-                        Biotechnology
-                    </h3>
+    opacity:0;
 
-                    <p>
-                        Molecular biology, genetics, biotechnology
-                        and biological research form the foundation.
-                    </p>
+    animation:
+    rightDNA 1.5s
+    cubic-bezier(.2,.8,.2,1)
+    .1s forwards;
+  }
+}
 
-                </div>
+/* DNA BARS */
 
+.rung{
+    position:absolute;
 
-                <div class="aboutCard">
+    left:50%;
 
-                    <div class="cardNumber">
-                        02 / COMPUTATION
-                    </div>
+    height:5px;
 
-                    <h3>
-                        Artificial Intelligence
-                    </h3>
+    border-radius:20px;
 
-                    <p>
-                        Programming, data science and machine learning
-                        applied to biological and genomic problems.
-                    </p>
+    background:#64edff;
 
-                </div>
+    box-shadow:
+    0 0 8px #64edff,
+    0 0 20px #00d9ff;
 
-            </div>
+    opacity:0;
 
-        </div>
+    transform-origin:center;
 
-    </section>
+    animation:
+    rungAppear .25s ease forwards;
+}
 
 
+/* BARS */
 
-    <!-- SKILLS -->
+.r1{top:20px;width:45px;margin-left:-22px;animation-delay:.65s}
+.r2{top:52px;width:58px;margin-left:-29px;animation-delay:.75s}
+.r3{top:84px;width:70px;margin-left:-35px;animation-delay:.85s}
+.r4{top:116px;width:82px;margin-left:-41px;animation-delay:.95s}
+.r5{top:148px;width:94px;margin-left:-47px;animation-delay:1.05s}
+.r6{top:180px;width:106px;margin-left:-53px;animation-delay:1.15s}
+.r7{top:212px;width:118px;margin-left:-59px;animation-delay:1.25s}
+.r8{top:244px;width:130px;margin-left:-65px;animation-delay:1.35s}
+.r9{top:276px;width:142px;margin-left:-71px;animation-delay:1.45s}
+.r10{top:308px;width:154px;margin-left:-77px;animation-delay:1.55s}
+.r11{top:340px;width:166px;margin-left:-83px;animation-delay:1.65s}
+.r12{top:372px;width:178px;margin-left:-89px;animation-delay:1.75s}
 
-    <section
-        class="verticalSection"
-        id="skills">
 
-        <div class="sideTitle">
-            02 — SKILLS
-        </div>
+/* ANIMATIONS */
 
-        <div class="sectionContent">
+@keyframes leftDNA{
 
-            <h2 class="sectionHeading">
-                Current<br>
-                toolkit.
-            </h2>
+    0%{
+        transform:
+        rotate(-15deg)
+        translateX(-150px);
 
-            <div class="skillList">
+        opacity:0;
+    }
 
-                <div class="skill">
-                    Python
-                </div>
+    70%{
+        opacity:1;
+    }
 
-                <div class="skill">
-                    NumPy
-                </div>
+    100%{
+        transform:
+        rotate(-15deg)
+        translateX(0);
 
-                <div class="skill">
-                    Pandas
-                </div>
+        opacity:1;
+    }
+}
 
-                <div class="skill">
-                    Genetics
-                </div>
 
-                <div class="skill">
-                    Biotechnology
-                </div>
+@keyframes rightDNA{
 
-                <div class="skill">
-                    Bioinformatics
-                </div>
+    0%{
+        transform:
+        rotate(15deg)
+        translateX(150px);
 
-                <div class="skill">
-                    Data Science
-                </div>
+        opacity:0;
+    }
 
-                <div class="skill">
-                    Machine Learning
-                </div>
+    70%{
+        opacity:1;
+    }
 
-                <div class="skill">
-                    SQL
-                </div>
+    100%{
+        transform:
+        rotate(15deg)
+        translateX(0);
 
-                <div class="skill">
-                    GitHub
-                </div>
+        opacity:1;
+    }
+}
 
-            </div>
 
-        </div>
+@keyframes rungAppear{
 
-    </section>
+    0%{
+        opacity:0;
+        transform:scaleX(0);
+    }
 
+    100%{
+        opacity:1;
+        transform:scaleX(1);
+    }
+}
 
 
-    <!-- PROJECTS -->
+@keyframes dnaPop{
 
-    <section
-        class="verticalSection"
-        id="projects">
+    0%{
+        transform:
+        translate(-50%,-50%)
+        scale(.7);
+    }
 
-        <div class="sideTitle">
-            03 — PROJECTS
-        </div>
+    65%{
+        transform:
+        translate(-50%,-50%)
+        scale(1.12);
+    }
 
-        <div class="sectionContent">
+    100%{
+        transform:
+        translate(-50%,-50%)
+        scale(1);
+    }
+}
 
-            <h2 class="sectionHeading">
-                Selected<br>
-                experiments.
-            </h2>
 
+/* TEXT */
 
-            <div class="project">
+.intro-text{
+    position:absolute;
 
-                <div>
+    top:72%;
 
-                    <div class="projectTitle">
-                        Genomic Data
-                    </div>
+    width:100%;
 
-                    <p class="projectDescription">
-                        Python-based exploration of biological
-                        and genomic datasets.
-                    </p>
+    text-align:center;
+}
 
-                </div>
 
-                <div class="projectNo">
-                    01
-                </div>
+.technology,
+.name,
+.biotech{
 
-            </div>
+    opacity:0;
 
+    transform:translateY(20px);
 
-            <div class="project">
+    animation:
+    textAppear .8s ease forwards;
+}
 
-                <div>
 
-                    <div class="projectTitle">
-                        Bio × AI
-                    </div>
+.technology{
+    color:#64eaff;
 
-                    <p class="projectDescription">
-                        Exploring machine learning applications
-                        in biotechnology.
-                    </p>
+    font-size:13px;
 
-                </div>
+    letter-spacing:7px;
 
-                <div class="projectNo">
-                    02
-                </div>
+    animation-delay:3.5s;
+}
 
-            </div>
 
+.name{
+    margin-top:18px;
 
-            <div class="project">
+    font-size:clamp(24px,5vw,46px);
 
-                <div>
+    font-weight:bold;
 
-                    <div class="projectTitle">
-                        Python Lab
-                    </div>
+    letter-spacing:3px;
 
-                    <p class="projectDescription">
-                        Computational experiments and
-                        programming projects.
-                    </p>
+    animation-delay:4.8s;
+}
 
-                </div>
 
-                <div class="projectNo">
-                    03
-                </div>
+.biotech{
+    margin-top:16px;
 
-            </div>
+    color:#c992ff;
 
-        </div>
+    font-size:25px;
 
-    </section>
+    letter-spacing:5px;
 
+    animation-delay:6.1s;
+}
 
 
-    <!-- FOOTER -->
+.biotech span{
+    color:#64eaff;
+}
 
-    <footer>
 
-        <strong>
-            SOHINI NASKAR
-        </strong>
+@keyframes textAppear{
 
-        <br><br>
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
 
-        BIOTECHNOLOGY × AI
-
-    </footer>
-
-
-</main>
-
-</body>
-</html>
+</style>
